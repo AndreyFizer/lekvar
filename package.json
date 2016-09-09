@@ -5,7 +5,7 @@
   "main"           : "app.js",
   "scripts"        : {
     "test" : "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install && grunt build && node server.js"
+    "start": "grunt build && node server.js"
   },
   "repository"     : {
     "type": "git",
@@ -13,10 +13,10 @@
   },
   "author"         : "",
   "license"        : "ISC",
-  "bugs"           : {
-    "url": "https://github.com/AndreyFizer/lekvar/issues"
-  },
+  "engines"        : { "node": "4.4.4"},
+  "bugs"           : { "url": "https://github.com/AndreyFizer/lekvar/issues"},
   "homepage"       : "https://github.com/AndreyFizer/lekvar#readme",
+
   "dependencies"   : {
     "backbone.marionette": "^3.0.0",
     "connect-multiparty" : "^1.2.5",
