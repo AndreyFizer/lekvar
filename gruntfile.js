@@ -1,43 +1,39 @@
-//reated by andrey on 19.06.16.
-
 module.exports = function (grunt) {
-    "use strict";
-    
     grunt.initConfig({
-        notify: {
-            sass: {
-                options: {
-                    title  : 'SCSS to CSS',
-                    message: 'main.css successfully generated...'
-                }
-            }
-        },
-    
-        sass: {
+        browserify : {
             dist: {
                 options: {
-                    style: 'expanded'
+                    transform: [
+                        ['babelify', { 'presets': ['es2015']}],
+                        ['jstify']
+                    ]
                 },
-                files: {
-                    'public/styles/main.css': 'public/styles/main.scss'
+                files  : {
+                    './public/bundle.js': ['./public/app/app.js']
                 }
             }
         },
-    
-        watch: {
-            sass: {
-                files  : 'public/styles/*.scss',
-                tasks  : ['sass', 'notify:sass'],
-                options: {
-                    debounceDelay: 1000
-                }
+        copy       : {
+            main: {
+                files: [
+                    // includes files within path
+                    {expand: true, cwd: './public/app/assets/', src: ['*'], dest: './public'},
+                    {expand: true, cwd: './public/app/styles/', src: ['*'], dest: './public'}
+                ]
+            }
+        },
+        watch      : {
+            scripts: {
+                files: ["./app/**"],
+                tasks: ["build"]
             }
         }
     });
     
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-notify');
-
-    grunt.registerTask('style', ['sass', 'notify:sass', 'watch']);
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    
+    grunt.registerTask('start', ['build', 'watch']);
+    grunt.registerTask("build", ["browserify", "copy:main"]);
 };

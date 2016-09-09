@@ -16,22 +16,6 @@ module.exports = function (app, db) {
         }
         res.render('login');
     }
-    
-    app.get('/', function(req, res, next){
-        if (req.session.uId){
-            res.render('index');
-        } else {
-            res.render('login');
-        }
-    });
-    
-    app.get('/registration', function(req, res, next){
-        if (req.session.uId){
-            res.redirect('/');
-        } else {
-            res.render('registration');
-        }
-    });
 
     app.post('/login', userHandler.letsLogin);
     app.post('/registration', userHandler.letsRegister);
