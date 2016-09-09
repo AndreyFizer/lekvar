@@ -1,10 +1,10 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        browserify : {
+        browserify: {
             dist: {
                 options: {
                     transform: [
-                        ['babelify', { 'presets': ['es2015']}],
+                        ['babelify', {'presets': ['es2015']}],
                         ['jstify']
                     ]
                 },
@@ -13,16 +13,25 @@ module.exports = function (grunt) {
                 }
             }
         },
-        copy       : {
+        htmlmin   : {
+            dist: {
+                options: {
+                    removeComments    : true,
+                    collapseWhitespace: true
+                },
+                files  : {
+                    'public/index.html'  : './public/app/assets/index.html'
+                }
+            }
+        },
+        copy      : {
             main: {
                 files: [
-                    // includes files within path
-                    {expand: true, cwd: './public/app/assets/', src: ['*'], dest: './public'},
-                    {expand: true, cwd: './public/app/styles/', src: ['*'], dest: './public'}
+                    {expand: true, cwd: 'public/app/styles/', src: ['*'], dest: 'public'}
                 ]
             }
         },
-        watch      : {
+        watch     : {
             scripts: {
                 files: ["./app/**"],
                 tasks: ["build"]
@@ -33,7 +42,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-htmlmin");
     
     grunt.registerTask('start', ['build', 'watch']);
-    grunt.registerTask("build", ["browserify", "copy:main"]);
+    grunt.registerTask("build", ["browserify", "copy:main", "htmlmin"]);
 };
