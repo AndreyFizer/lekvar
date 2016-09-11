@@ -5,11 +5,11 @@ module.exports = function (grunt) {
                 options: {
                     transform: [
                         ['babelify', {'presets': ['es2015']}],
-                        ['jstify']
+                        ['jstify', {'engine' : 'lodash'}]
                     ]
                 },
                 files  : {
-                    'public/bundle.js': ['public/app/app.js']
+                    'public/app/bundle.js': ['public/source/js/main.js']
                 }
             }
         },
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files  : {
-                    'public/index.html'  : 'public/app/assets/index.html'
+                    'public/index.html'  : 'public/source/index.html'
                 }
             }
         },
@@ -31,7 +31,7 @@ module.exports = function (grunt) {
                     style: 'expanded'
                 },
                 files: {
-                    'public/main.css': 'public/app/styles/main.scss'
+                    'public/app/main.css': 'public/source/styles/main.scss'
                 }
             }
         },

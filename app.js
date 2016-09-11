@@ -58,7 +58,7 @@ db.once('open', function () {
     app.use(logger('dev'));
     
     app.set('views', path.join(__dirname, 'public', 'pug'));
-    app.set('view engine', 'pug');
+    app.set('view engine', 'ejs');
     
     app.use(bodyParser.json({strict: false, inflate: false, limit: 1024 * 1024 * 5}));
     app.use(bodyParser.urlencoded({extended: false, limit: 1024 * 1024 * 5}));
