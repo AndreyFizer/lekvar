@@ -24,13 +24,18 @@ module.exports = function (grunt) {
                 }
             }
         },
-        copy      : {
-            main: {
-                files: [
-                    {expand: true, cwd: 'public/app/styles/', src: ['*'], dest: 'public'}
-                ]
+        
+        sass: {
+            dist: {
+                options: {
+                    style: 'expanded'
+                },
+                files: {
+                    'public/main.css': 'public/app/styles/main.scss'
+                }
             }
         },
+        
         watch     : {
             scripts: {
                 files: ["./app/**"],
@@ -40,10 +45,10 @@ module.exports = function (grunt) {
     });
     
     grunt.loadNpmTasks('grunt-browserify');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-htmlmin");
     
     grunt.registerTask('start', ['build', 'watch']);
-    grunt.registerTask("build", ["browserify", "copy:main", "htmlmin"]);
+    grunt.registerTask("build", ["browserify", "sass", "htmlmin"]);
 };
