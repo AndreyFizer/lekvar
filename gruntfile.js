@@ -9,7 +9,7 @@ module.exports = function (grunt) {
                     ]
                 },
                 files  : {
-                    './public/bundle.js': ['./public/app/app.js']
+                    'public/bundle.js': ['public/app/app.js']
                 }
             }
         },
@@ -20,14 +20,14 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files  : {
-                    './public/index.html'  : './public/app/assets/index.html'
+                    'public/index.html'  : 'public/app/assets/index.html'
                 }
             }
         },
         copy      : {
             main: {
                 files: [
-                    {expand: true, cwd: './public/app/styles/', src: ['*'], dest: './public'}
+                    {expand: true, cwd: 'public/app/styles/', src: ['*'], dest: 'public'}
                 ]
             }
         },
