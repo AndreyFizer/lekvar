@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v3.0.0
@@ -29505,20 +29505,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vendors = require('vendors');
 
-var _itemView = require('views/itemView');
+var _itemView = require('views/item/itemView');
 
 var _itemView2 = _interopRequireDefault(_itemView);
+
+var _index = require('routers/index');
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Application = _vendors.Marionette.Application.extend({
-    region: '#app',
+    region: '#wrapper',
 
     initialize: function initialize() {},
     onStart: function onStart() {
+        var itemView = new _itemView2.default();
+
+        new _index2.default();
         _vendors.Backbone.history.fragment || _vendors.Backbone.history.start();
 
-        this.showView(new _itemView2.default());
+        this.showView(itemView);
     }
 });
 
@@ -29526,7 +29533,7 @@ window.APP = Application;
 
 exports.default = Application;
 
-},{"vendors":"vendors","views/itemView":9}],8:[function(require,module,exports){
+},{"routers/index":9,"vendors":10,"views/item/itemView":11}],8:[function(require,module,exports){
 'use strict';
 
 var _vendors = require('vendors');
@@ -29543,7 +29550,7 @@ document.addEventListener('DOMContentLoaded', function () {
     app.start();
 });
 
-},{"./app":7,"vendors":"vendors"}],9:[function(require,module,exports){
+},{"./app":7,"vendors":10}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29552,27 +29559,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vendors = require('vendors');
 
-var _itemTmpl = require('templates/itemTmpl.html');
+exports.default = _vendors.Marionette.AppRouter.extend({
+    routes: {
+        'users': 'userRout',
+        '*any': 'anyRout'
+    },
 
-var _itemTmpl2 = _interopRequireDefault(_itemTmpl);
+    userRout: function userRout() {
+        console.log('You are on user rout now');
+    },
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    anyRout: function anyRout() {
+        _vendors.Backbone.history.navigate('users', { trigger: true });
+    }
 
-exports.default = _vendors.Marionette.View.extend({
-    template: _itemTmpl2.default
 });
 
-},{"templates/itemTmpl.html":10,"vendors":"vendors"}],10:[function(require,module,exports){
-var _ = require('lodash');
-module.exports = function(obj){
-var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
-with(obj||{}){
-__p+='<div id="content"> <h1>&nbsp;</h1> <h2>Welcome!</h2> <ul> <li><a href="http://browserify.org/">Browserify homepage</a></li> <li><a href="http://marionettejs.com/">Marionette.js homepage</a></li> </ul> </div>';
-}
-return __p;
-};
-
-},{"lodash":5}],"vendors":[function(require,module,exports){
+},{"vendors":10}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29606,4 +29609,33 @@ exports.$ = _jquery2.default;
 exports.Backbone = _backbone2.default;
 exports.Marionette = _backbone4.default;
 
-},{"backbone":3,"backbone.marionette":1,"jquery":4,"lodash":5}]},{},[8]);
+},{"backbone":3,"backbone.marionette":1,"jquery":4,"lodash":5}],11:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _vendors = require('vendors');
+
+var _itemTmpl = require('templates/itemTmpl.html');
+
+var _itemTmpl2 = _interopRequireDefault(_itemTmpl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vendors.Marionette.View.extend({
+    template: _itemTmpl2.default
+});
+
+},{"templates/itemTmpl.html":12,"vendors":10}],12:[function(require,module,exports){
+var _ = require('lodash');
+module.exports = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<div id="content"> <h1>&nbsp;</h1> <h2>Welcome!</h2> <ul> <li><a href="http://browserify.org/">Browserify homepage</a></li> <li><a href="http://marionettejs.com/">Marionette.js homepage</a></li> </ul> </div>';
+}
+return __p;
+};
+
+},{"lodash":5}]},{},[8]);

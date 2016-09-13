@@ -7,10 +7,7 @@ module.exports = function (grunt) {
                         './public/source/js',
                         './public/source'
                     ]
-                },
-                alias : [
-                    './public/source/js/vendors.js:vendors'
-                ]
+                }
             },
             dist   : {
                 options: {

@@ -1,17 +1,21 @@
 import {Marionette, Backbone} from 'vendors';
-import ItemView from 'views/itemView';
+import ItemView from 'views/item/itemView';
+import Router from 'routers/index';
 
 var Application = Marionette.Application.extend({
-    region: '#app',
+    region: '#wrapper',
     
     initialize() {
 
     },
     
     onStart(){
+        var itemView = new ItemView();
+        
+        new Router();
         Backbone.history.fragment || Backbone.history.start();
         
-        this.showView(new ItemView());
+        this.showView(itemView);
     }
 });
 
