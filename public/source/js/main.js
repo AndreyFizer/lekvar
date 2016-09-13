@@ -1,4 +1,4 @@
-import {$} from './vendors';
+import {$} from 'vendors';
 import App from './app';
 
 document.addEventListener('DOMContentLoaded', () => {

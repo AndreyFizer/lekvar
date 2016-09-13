@@ -1,12 +1,20 @@
-import {Marionette} from './vendors';
+import {Marionette, Backbone} from 'vendors';
 import ItemView from './views/itemView';
 
-export default Marionette.Application.extend({
+var Application = Marionette.Application.extend({
     region: '#app',
     
     initialize() {
-        this.on('start', () => {
-            this.showView(new ItemView());
-        })
+
+    },
+    
+    onStart(){
+        Backbone.history.fragment || Backbone.history.start();
+        
+        this.showView(new ItemView());
     }
 });
+
+window.APP = Application;
+
+export default Application;

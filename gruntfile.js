@@ -1,11 +1,18 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         browserify: {
-            dist: {
+            options: {
+                alias: [
+                    './public/source/js/vendors.js:vendors',
+                    './public/source/js/views:views',
+                    './public/source/templates:templates'
+                ]
+            },
+            dist   : {
                 options: {
                     transform: [
                         ['babelify', {'presets': ['es2015']}],
-                        ['jstify', {'engine' : 'lodash'}]
+                        ['jstify', {'engine': 'lodash'}]
                     ]
                 },
                 files  : {
@@ -20,7 +27,7 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files  : {
-                    'public/index.html'  : 'public/source/index.html'
+                    'public/index.html': 'public/source/index.html'
                 }
             }
         },
@@ -30,13 +37,13 @@ module.exports = function (grunt) {
                 options: {
                     style: 'expanded'
                 },
-                files: {
+                files  : {
                     'public/app/main.css': 'public/source/styles/main.scss'
                 }
             }
         },
         
-        watch     : {
+        watch: {
             scripts: {
                 files: ["./app/**"],
                 tasks: ["build"]
