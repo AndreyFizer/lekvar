@@ -1,5 +1,5 @@
 import {Marionette, Backbone} from 'vendors';
-import ItemView from './views/itemView';
+import ItemView from 'views/itemView';
 
 var Application = Marionette.Application.extend({
     region: '#app',

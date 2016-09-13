@@ -2,10 +2,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
         browserify: {
             options: {
-                alias: [
-                    './public/source/js/vendors.js:vendors',
-                    './public/source/js/views:views',
-                    './public/source/templates:templates'
+                browserifyOptions: {
+                    paths: [
+                        './public/source/js',
+                        './public/source'
+                    ]
+                },
+                alias : [
+                    './public/source/js/vendors.js:vendors'
                 ]
             },
             dist   : {
