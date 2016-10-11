@@ -36,6 +36,7 @@
     "express-subdomain": "1.0.3",
     "jquery": "^3.1.0",
     "lodash": "^3.7.0",
+    "moment": "^2.15.0",
     "mongoose": "^4.1.11",
     "morgan": "1.6.1",
     "serve-favicon": "~2.3.0"
