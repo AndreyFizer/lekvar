@@ -17,7 +17,9 @@ module.exports = function (app, db) {
         res.render('login');
     }
 
-    app.get('/graph', function(req, res, next){
+    app.get('/graph/:id', function(req, res, next){
+        const id = req.params.id;
+        
        const result = {
            nodes: [
                {id: 0, name: 'Peter', url: 'http://digmast.ru/images/lessons/photo_for_documents/preview.jpg'},
@@ -51,6 +53,8 @@ module.exports = function (app, db) {
                {nodes: [6, 10], kind: 'friendship'},
            ]
        };
+       
+       result.nodes[id].c = true;
        
        res.status(200).send(result);
     });
