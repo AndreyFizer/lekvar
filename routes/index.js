@@ -55,7 +55,8 @@ module.exports = function (app, db) {
        };
        
        result.nodes[id].c = true;
-       
+    
+        res.setHeader("Access-Control-Allow-Origin", "*");
        res.status(200).send(result);
     });
     app.post('/login', userHandler.letsLogin);
