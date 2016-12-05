@@ -28,11 +28,11 @@ module.exports = function (app, db) {
                {id: 3, name: 'Thomas', url: 'http://golbis.com/wp-content/uploads/2016/09/1473427482k84ng-250x250.jpg'},
                {id: 4, name: 'Anna', url: 'https://active-camp.ru/wp-content/uploads/2015/10/avatar-250x250.jpg'},
                {id: 5, name: 'Julia', url: 'http://devushka.ru/upload/pagestyle/55_avatar_Ruslana%20%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80.jpg'},
-               {id: 6, name: 'Katrin', url: 'http://rosstur44.ru/design/mt/images/bg-face-no-man.jpg'},
-               {id: 7, name: 'Katharina', url: 'http://rosstur44.ru/design/mt/images/bg-face-no-man.jpg'},
-               {id: 8, name: 'Silvia', url: 'http://rosstur44.ru/design/mt/images/bg-face-no-man.jpg'},
+               {id: 6, name: 'Katrin'},
+               {id: 7, name: 'Katharina'},
+               {id: 8, name: 'Silvia'},
                {id: 9, name: 'Jenny', url: 'https://active-camp.ru/wp-content/uploads/2015/04/Avatar1-250x250.jpg'},
-               {id: 10, name: 'Antony', url: 'http://rosstur44.ru/design/mt/images/bg-face-no-man.jpg'}
+               {id: 10, name: 'Antony'}
            ],
            links: [
                {nodes: [0, 1], kind: 'friendship'},
