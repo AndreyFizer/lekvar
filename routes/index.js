@@ -85,7 +85,7 @@ module.exports = function(app, db) {
         };
     
         res.setHeader("Access-Control-Allow-Origin", "*");
-        res.status.send(result);
+        res.status(200).send(result);
     });
     
     app.post('/login', userHandler.letsLogin);
