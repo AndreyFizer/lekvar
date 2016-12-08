@@ -1,8 +1,8 @@
-const express = require('express');
-const UserHandler = require('../handlers/users');
-const _ = require('lodash');
+var express = require('express');
+var UserHandler = require('../handlers/users');
+var _ = require('lodash');
 
-const _eventsCache = [
+var _eventsCache = [
     {id: 1, coordinates: [10, 23], class: 'A', description: 'some text'},
     {id: 2, coordinates: [-45, 122], class: 'B', description: 'rokki'},
     {id: 3, coordinates: [35, 63], class: 'B', description: 'pavlo zibrov'},
@@ -10,7 +10,7 @@ const _eventsCache = [
     {id: 5, coordinates: [28, -30], class: 'A', description: 'good morning'},
     {id: 6, coordinates: [30, 23], class: 'C', description: 'antananarivoo'}
 ];
-let _eventId = 6;
+var _eventId = 6;
 
 module.exports = function(app, db) {
     "use strict";
