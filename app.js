@@ -73,6 +73,12 @@ db.once('open', function () {
         store            : new MemoryStore(sessionConfig)
     }));
     
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        next();
+    });
+    
     require('./routes/index')(app, db);
     
     app.listen(port, function () {

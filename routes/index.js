@@ -1,6 +1,16 @@
-var express = require('express');
-var UserHandler = require('../handlers/users');
-var _ = require('lodash');
+const express = require('express');
+const UserHandler = require('../handlers/users');
+const _ = require('lodash');
+
+const _eventsCache = [
+    {id: 1, coordinates: [10, 23], class: 'A', description: 'some text'},
+    {id: 2, coordinates: [-45, 122], class: 'B', description: 'rokki'},
+    {id: 3, coordinates: [35, 63], class: 'B', description: 'pavlo zibrov'},
+    {id: 4, coordinates: [17, -23], class: 'C', description: 'otter John'},
+    {id: 5, coordinates: [28, -30], class: 'A', description: 'good morning'},
+    {id: 6, coordinates: [30, 23], class: 'C', description: 'antananarivoo'}
+];
+let _eventId = 6;
 
 module.exports = function(app, db) {
     "use strict";
@@ -23,20 +33,24 @@ module.exports = function(app, db) {
         const result = {
             nodes: [
                 {id: 0, name: 'Peter', url: 'http://digmast.ru/images/lessons/photo_for_documents/preview.jpg'},
-                {id     : 1,
+                {
+                    id  : 1,
                     name: 'Paul',
                     url : 'https://dreamitcodeitwinit.files.wordpress.com/2014/01/290053v2-max-250x250.jpg?w=1000'
                 },
-                {id     : 2,
+                {
+                    id  : 2,
                     name: 'Florian',
                     url : 'http://gazeta.lviv.ua/wp-content/uploads/2016/06/12910642_584264068395305_278364554_n-250x250-1-1-1-1-2.jpg'
                 },
-                {id     : 3,
+                {
+                    id  : 3,
                     name: 'Thomas',
                     url : 'http://golbis.com/wp-content/uploads/2016/09/1473427482k84ng-250x250.jpg'
                 },
                 {id: 4, name: 'Anna', url: 'https://active-camp.ru/wp-content/uploads/2015/10/avatar-250x250.jpg'},
-                {id     : 5,
+                {
+                    id  : 5,
                     name: 'Julia',
                     url : 'http://devushka.ru/upload/pagestyle/55_avatar_Ruslana%20%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80.jpg'
                 },
@@ -68,23 +82,31 @@ module.exports = function(app, db) {
         
         result.nodes[id].c = true;
         
-        res.setHeader("Access-Control-Allow-Origin", "*");
+        // res.setHeader("Access-Control-Allow-Origin", "*");
         res.status(200).send(result);
     });
     
     app.get('/mapdata', function(req, res, next) {
         const result = {
-            events: [
-                {id: 1, coordinates: [10, 23], class: 'A', description: 'some text'},
-                {id: 2, coordinates: [-45, 122], class: 'B', description: 'rokki'},
-                {id: 3, coordinates: [35, 63], class: 'B', description: 'pavlo zibrov'},
-                {id: 4, coordinates: [17, -23], class: 'C', description: 'otter John'},
-                {id: 5, coordinates: [28, - 30], class: 'A', description: 'good morning'},
-                {id: 6, coordinates: [30, 23], class: 'C', description: 'antananarivoo'}
-            ]
+            events: _eventsCache
         };
+        
+        // res.setHeader("Access-Control-Allow-Origin", "*");
+        res.status(200).send(result);
+    });
     
-        res.setHeader("Access-Control-Allow-Origin", "*");
+    app.post('/mapdata', function(req, res, next) {
+        const body = req.body;
+        
+        const result = {
+            id         : ++_eventId,
+            coordinates: [body.position.lat, body.position.lng],
+            class      : body.class || '',
+            description: body.description || ''
+        };
+        
+        _eventsCache.push(result);
+        
         res.status(200).send(result);
     });
     
